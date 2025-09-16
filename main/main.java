@@ -1,6 +1,7 @@
 package main;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import metier.*;
 import utils.Validator;
@@ -16,7 +17,7 @@ public class main {
 		double soulde ;
     	double supplémentaire ;
     	double InterestRate;
-    	UUID acountID ;
+    	UUID acountID = null ;
     	UUID ReseveracountID ;
     	String input;
     	CompteCourant tempCompteCourant = null;
@@ -27,7 +28,8 @@ public class main {
     	Destination destination = null;
     	Versement versement = null;
 		HashMap<UUID,Object> coumpts = new HashMap<UUID, Object>() ;
-		
+		List<Retrait> retraitlist = null;
+		List<Versement> versementslist = null;
 		
 
         do {
@@ -252,11 +254,54 @@ public class main {
                     break;
                 case 5:
                     System.out.println("📊 Consultation du solde...");
-                    // logiqe solde
+                    System.out.print("👉 Entrez l'UUID du compte : ");
+                    sc.nextLine(); // vider le buffer
+                    String inputUUID = sc.nextLine();
+
+                    
+                    try {
+                    	acountID = UUID.fromString(inputUUID);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("⚠️ UUID invalide !");
+                        break;
+                    }
+
+                    // --- Récupérer le compte ---
+                    Object compte = coumpts.get(acountID);
+                    
+                    if (coumpts.get(acountID) instanceof CompteCourant) {
+						tempCompteCourant = (CompteCourant) coumpts.get(acountID); 
+						System.out.println("💰 Solde du compte [" + tempCompteCourant.getCode() + "] : " + tempCompteCourant.getSolde() + " €");
+					}
+                    if (coumpts.get(acountID) instanceof CompteEpargne) {
+						tempCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
+						System.out.println("💰 Solde du compte [" + tempCompteCourant.getCode() + "] : " + tempCompteCourant.getSolde() + " €");
+					}
                     break;
                 case 6:
                     System.out.println("📜 Liste des opérations...");
                     // logiqe opérations
+                    System.out.print("👉 Entrez l'UUID du compte : ");
+                    sc.nextLine(); // vider le buffer
+                    input = sc.nextLine();
+
+                    
+                    try {
+                    	acountID = UUID.fromString(input);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("⚠️ UUID invalide !");
+                        break;
+                    }
+                    if (coumpts.get(acountID) instanceof CompteCourant) {
+						tempCompteCourant = (CompteCourant) coumpts.get(acountID); 
+						
+					}
+                    if (coumpts.get(acountID) instanceof CompteEpargne) {
+						tempCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
+					}
+                    
+                    
+                    
                     break;
                 case 0:
                     System.out.println("👋 Merci d'avoir utilisé notre banque !");
