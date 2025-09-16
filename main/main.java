@@ -19,10 +19,13 @@ public class main {
     	UUID acountID ;
     	UUID ReseveracountID ;
     	String input;
-    	CompteCourant tempCompteCourant;
-    	CompteEpargne tempCompteEpargne;
-    	CompteCourant ReseverCompteCourant;
-    	CompteEpargne ReseverCompteEpargne;
+    	CompteCourant tempCompteCourant = null;
+    	CompteEpargne tempCompteEpargne= null;
+    	CompteCourant ReseverCompteCourant= null;
+    	CompteEpargne ReseverCompteEpargne = null;
+    	Retrait retrait = null;
+    	Destination destination = null;
+    	Versement versement = null;
 		HashMap<UUID,Object> coumpts = new HashMap<UUID, Object>() ;
 		
 		
@@ -129,7 +132,7 @@ public class main {
                             System.out.println("⚠️ Choix invalide, versement annulé !");
                             break;
                     }
-                    Versement versement = new Versement(montant, source);
+                     versement = new Versement(montant, source);
 
                     if (tempCompteCourant != null) {
                         tempCompteCourant.setVersement(versement);
@@ -168,7 +171,7 @@ public class main {
                     int choixDestination = sc.nextInt();
                     sc.nextLine(); // vider le buffer
                     
-                    Destination destination = null;
+                    
                     switch (choixDestination) {
                         case 1: destination = Destination.DISTRIBUTEUR_ATM; break;
                         case 2: destination = Destination.CHEQUE; break;
@@ -177,7 +180,7 @@ public class main {
                             System.out.println("⚠️ Choix invalide, retrait annulé !");
                             break;
                     }
-                    Retrait retrait = new Retrait(montant, destination);
+                     retrait = new Retrait(montant, destination);
                     
                     if (tempCompteCourant != null) {
                     	if (tempCompteCourant.retirer(montant)) {
@@ -206,12 +209,46 @@ public class main {
                         System.out.println("⚠️ UUID invalide !");
                         break;
                     }
+                    if (coumpts.get(acountID) instanceof CompteCourant) {
+						tempCompteCourant = (CompteCourant) coumpts.get(acountID); 
+					}
+                    if (coumpts.get(acountID) instanceof CompteEpargne) {
+						tempCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
+					}
+                    if (coumpts.get(ReseveracountID) instanceof CompteCourant) {
+                    	ReseverCompteCourant = (CompteCourant) coumpts.get(acountID); 
+					}
+                    if (coumpts.get(ReseveracountID) instanceof CompteEpargne) {
+                    	ReseverCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
+					}
+                    System.out.print("👉 Entrez le monton de Virement : ");
+                    double vermont = Validator.asknegativeDouble("");
                     
-                    
-                    
-                    
-                    
-                    // logiqe virement
+                    retrait =  new Retrait(vermont, Destination.VIREMENT_SORTANT);
+//                    sender
+                    if (tempCompteCourant != null) {
+                    	if (tempCompteCourant.retirer(vermont)) {
+                    		tempCompteCourant.setRetrait(retrait);
+						}
+                    	
+                    } else if (tempCompteEpargne != null) {
+                    	if (tempCompteEpargne.retirer(vermont)) {
+                    		tempCompteEpargne.setRetrait(retrait);
+						}
+                    }
+//                    resever
+                    versement = new Versement(vermont*-1,OpperationSource.VIREMENT_EXTERNE);
+                    if (ReseverCompteCourant != null) {
+                    	if (ReseverCompteCourant.retirer(vermont*-1)) {
+                    		ReseverCompteCourant.setVersement(versement);
+						}
+                    	
+                    } else if (ReseverCompteEpargne != null) {
+                    	if (ReseverCompteEpargne.retirer(vermont*-1)) {
+                    		ReseverCompteEpargne.setVersement(versement);
+						}
+                    }
+                    System.out.println("✅ Virement de " + vermont + " effectué avec succès !");
                     break;
                 case 5:
                     System.out.println("📊 Consultation du solde...");
