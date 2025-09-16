@@ -1,4 +1,5 @@
 package metier;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -6,7 +7,7 @@ public abstract class Compte {
 	protected UUID code;
 	protected double solde;
 //	to be added later 
-//	protected List<opperation> opperasions;
+	protected HashMap<UUID, Object> opperasions;
 	
 	public abstract void retirer(double amount);
 	public abstract double calculerInteret(float intrest);
