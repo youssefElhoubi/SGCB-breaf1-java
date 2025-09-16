@@ -17,12 +17,13 @@ public class CompteEpargne extends Compte {
 		return this.InterestRate;
 	}
 	@Override()
-	public void retirer(double amount) {
+	public boolean retirer(double amount) {
 		if (this.solde>amount) {
 			System.out.println("the amount your tring to withrawl is more that your solde");
+			return false;
 		}else {
-			System.out.println("you have withrawl" + amount);
 		this.solde -= amount;
+		return true;
 		}
 	}
 	@Override()

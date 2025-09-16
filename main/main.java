@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.UUID;
 import metier.*;
 import utils.Validator;
+import utils.Comptfinder;
+import utils.OpperationSource;
+import utils.Destination;
+
 
 public class main {
 	public static void main(String[] args) {
@@ -13,9 +17,14 @@ public class main {
     	double supplémentaire ;
     	double InterestRate;
     	UUID acountID ;
+    	UUID ReseveracountID ;
+    	String input;
     	CompteCourant tempCompteCourant;
     	CompteEpargne tempCompteEpargne;
+    	CompteCourant ReseverCompteCourant;
+    	CompteEpargne ReseverCompteEpargne;
 		HashMap<UUID,Object> coumpts = new HashMap<UUID, Object>() ;
+		
 		
 
         do {
@@ -80,14 +89,128 @@ public class main {
                     break;
                 case 2:
                     System.out.println("💵 Versement dans un compte...");
-                    // logiqe versement
+                    System.out.print("👉 Entrez l'UUID du compte : ");
+                    sc.nextLine(); // pour vider le buffer si besoin
+                    input = sc.nextLine();
+
+                    try {
+                        acountID = UUID.fromString(input);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("⚠️ UUID invalide !");
+                        break;
+                    }
+
+                     tempCompteCourant = Comptfinder.CompteCourantFinder(acountID, coumpts);
+                    tempCompteEpargne = Comptfinder.CompteEpargneFinder(acountID, coumpts);
+
+                    if (tempCompteCourant == null && tempCompteEpargne == null) {
+                        System.out.println("⚠️ Aucun compte trouvé avec cet UUID !");
+                        break;
+                    }
+
+                    System.out.print("👉 Entrez le montant du versement : ");
+                    double montant = sc.nextDouble();
+                    sc.nextLine(); // vider le buffer
+
+                    // --- Demander la source du versement ---
+                    System.out.println("👉 Choisissez la source du versement : ");
+                    System.out.println("1️⃣ Virement externe");
+                    System.out.println("2️⃣ Dépôt espèces");
+                    System.out.println("3️⃣ Salaire");
+                    int choixSource = sc.nextInt();
+                    sc.nextLine(); // vider le buffer
+
+                    OpperationSource source = null;
+                    switch (choixSource) {
+                        case 1: source = OpperationSource.VIREMENT_EXTERNE; break;
+                        case 2: source = OpperationSource.DEPOT_ESPECES; break;
+                        case 3: source = OpperationSource.SALAIRE; break;
+                        default:
+                            System.out.println("⚠️ Choix invalide, versement annulé !");
+                            break;
+                    }
+                    Versement versement = new Versement(montant, source);
+
+                    if (tempCompteCourant != null) {
+                        tempCompteCourant.setVersement(versement);
+                        System.out.println("✅ Versement ajouté au Compte Courant.");
+                    } else if (tempCompteEpargne != null) {
+                        tempCompteEpargne.setVersement(versement);
+                        System.out.println("✅ Versement ajouté au Compte Épargne.");
+                    }
                     break;
                 case 3:
                     System.out.println("🏧 Retrait d'un compte...");
-                    // logiqe retrait
+                    System.out.print("👉 Entrez l'UUID du compte : ");
+                    sc.nextLine(); // vider le buffer si besoin
+                    input = sc.nextLine();
+
+                    try {
+                        acountID = UUID.fromString(input);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("⚠️ UUID invalide !");
+                        break;
+                    }
+
+                    tempCompteCourant = Comptfinder.CompteCourantFinder(acountID, coumpts);
+                    tempCompteEpargne = Comptfinder.CompteEpargneFinder(acountID, coumpts);
+                    
+                    if (tempCompteCourant == null && tempCompteEpargne == null) {
+                        System.out.println("⚠️ Aucun compte trouvé avec cet UUID !");
+                        break;
+                    }
+                    
+                    System.out.print("👉 Entrez le montant du retrait : ");
+                    montant = sc.nextDouble();
+                    sc.nextLine(); // vider le buffer
+                    
+                    
+                    int choixDestination = sc.nextInt();
+                    sc.nextLine(); // vider le buffer
+                    
+                    Destination destination = null;
+                    switch (choixDestination) {
+                        case 1: destination = Destination.DISTRIBUTEUR_ATM; break;
+                        case 2: destination = Destination.CHEQUE; break;
+                        case 3: destination = Destination.VIREMENT_SORTANT; break;
+                        default:
+                            System.out.println("⚠️ Choix invalide, retrait annulé !");
+                            break;
+                    }
+                    Retrait retrait = new Retrait(montant, destination);
+                    
+                    if (tempCompteCourant != null) {
+                    	if (tempCompteCourant.retirer(montant)) {
+                    		tempCompteCourant.setRetrait(retrait);
+						}
+                    	
+                    } else if (tempCompteEpargne != null) {
+                    	if (tempCompteEpargne.retirer(montant)) {
+                    		tempCompteEpargne.setRetrait(retrait);
+						}
+                    }
                     break;
                 case 4:
                     System.out.println("🔄 Virement entre comptes...");
+                    System.out.print("👉 Entrez l'UUID du compte of the sender : ");
+                    sc.nextLine(); // pour vider le buffer si besoin
+                    input = sc.nextLine();
+                    System.out.print("👉 Entrez l'UUID du compte resever : ");
+                    sc.nextLine(); // pour vider le buffer si besoin
+                    String secondinput = sc.nextLine();
+                    
+                    try {
+                        acountID = UUID.fromString(input);
+                        ReseveracountID = UUID.fromString(secondinput);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("⚠️ UUID invalide !");
+                        break;
+                    }
+                    
+                    
+                    
+                    
+                    
                     // logiqe virement
                     break;
                 case 5:

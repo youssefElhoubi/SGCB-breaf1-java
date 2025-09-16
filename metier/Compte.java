@@ -9,7 +9,7 @@ public abstract class Compte {
 	protected List<Versement> versement;
 	
 	
-	public abstract void retirer(double amount);
+	public abstract boolean retirer(double amount);
 	public abstract double calculerInteret(float intrest);
 	public abstract void afficherDetails();
 	
