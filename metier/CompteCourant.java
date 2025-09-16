@@ -33,7 +33,4 @@ public class CompteCourant extends Compte {
 		System.out.println("this is your solde " + this.solde);
 		System.out.println("this is your max supplémentaire " + this.supplémentaire);
 	}
-	public void Opperation(UUID id,Object op) {
-		this.opperasions.put(id, op);
-	}
 }
