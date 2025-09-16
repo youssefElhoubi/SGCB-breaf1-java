@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.UUID;
 import metier.*;
+import utils.Validator;
 
 public class main {
 	public static void main(String[] args) {
@@ -43,14 +44,17 @@ public class main {
                     System.out.print("👉 Choisissez le type de compte : ");
 
                     int typeCompte = sc.nextInt();
+                    sc.nextLine();
 
                     switch (typeCompte) {
                         case 1:
                         	System.out.println("✅ Vous avez choisi un Compte Courant.");
                         	System.out.println("💵 Entrez le solde initial : ");
-                        	 soulde = sc.nextDouble();
+                        	 soulde = Validator.askPositiveDouble("");
+                        	 sc.nextLine(); // clear buffer
                         	 System.out.println("📉 Entrez le découvert autorisé (montant positif) : ");
-                        	 supplémentaire = sc.nextDouble();
+                        	 supplémentaire = Validator.asknegativeDouble("");
+                        	 sc.nextLine(); // clear buffer
                         	tempCompteCourant = new CompteCourant(soulde,supplémentaire);
                         	acountID = tempCompteCourant.getCode();
                         	coumpts.put(acountID, tempCompteCourant);
@@ -60,14 +64,15 @@ public class main {
                         case 2:
                         	System.out.println("✅ Vous avez choisi un Compte Épargne.");
                         	System.out.println("💵 Entrez le solde initial : ");
-                        	 soulde = sc.nextDouble();
+                        	 soulde = Validator.askPositiveDouble("");
+                        	 sc.nextLine(); // clear buffer
                         	 System.out.println("📈 Entrez le taux d’intérêt (ex: 0.05 pour 5%) : ");
-                        	 InterestRate = sc.nextDouble();
+                        	 InterestRate = Validator.askInterestRate("");
+                        	 sc.nextLine(); // clear buffer
                         	 tempCompteEpargne = new CompteEpargne(soulde,InterestRate);
                         	acountID = tempCompteEpargne.getCode();
                         	coumpts.put(acountID, tempCompteEpargne);
                         	tempCompteEpargne =null;
-                            // Ici : demander infos (solde initial, taux d’intérêt, etc.)
                             break;
                         default:
                             System.out.println("⚠️ Choix invalide pour le type de compte.");
