@@ -1,7 +1,5 @@
 package utils;
 
 public enum OpperationSource {
-	VIREMENT_EXTERNE,
-    DEPOT_ESPECES,
-    SALAIRE
+	VIREMENT_EXTERNE, DEPOT_ESPECES, SALAIRE
 }
