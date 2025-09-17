@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.HashMap;
 
 public class Validator {
 	private static Scanner sc = new Scanner(System.in);
@@ -84,6 +85,12 @@ public class Validator {
 				}
 			}
 		}
+	}
+	public static boolean doeaObjectExist(HashMap<UUID,Object>compt,UUID ID) {
+		if (compt.get(ID)==null) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -9,13 +10,14 @@ import utils.Validator;
 import utils.Comptfinder;
 import utils.OpperationSource;
 import utils.Destination;
+import ui.Components;
 
 public class main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int choix;
 		double soulde;
-		double supplémentaire;
+		double decouvert;
 		double InterestRate;
 		UUID acountID = null;
 		UUID ReseveracountID;
@@ -42,11 +44,12 @@ public class main {
 			System.out.println("4️⃣  Effectuer un virement entre comptes");
 			System.out.println("5️⃣  Consulter le solde du compte");
 			System.out.println("6️⃣  Consulter la liste des opérations");
+			System.out.println("7  all IDs");
 			System.out.println("0️⃣  Quitter");
 			System.out.println("=====================================");
 			System.out.print("👉 Votre choix : ");
 
-			choix = sc.nextInt();
+			choix = Validator.isBetween(0, 7);
 
 			switch (choix) {
 			case 1:
@@ -61,31 +64,16 @@ public class main {
 
 				switch (typeCompte) {
 				case 1:
-					System.out.println("✅ Vous avez choisi un Compte Courant.");
-					System.out.println("💵 Entrez le solde initial : ");
-					soulde = Validator.askPositiveDouble("");
-					sc.nextLine(); // clear buffer
-					System.out.println("📉 Entrez le découvert autorisé (montant positif) : ");
-					supplémentaire = Validator.asknegativeDouble("");
-					sc.nextLine(); // clear buffer
-					tempCompteCourant = new CompteCourant(soulde, supplémentaire);
-					acountID = tempCompteCourant.getCode();
-					coumpts.put(acountID, tempCompteCourant);
-					tempCompteCourant = null;
+					
+					tempCompteCourant = Components.CCM();
+					coumpts.put(tempCompteCourant.getCode(), tempCompteCourant);
+					System.out.println("you have create and account");
 					// Ici : demander infos (solde initial, découvert autorisé, etc.)
 					break;
 				case 2:
-					System.out.println("✅ Vous avez choisi un Compte Épargne.");
-					System.out.println("💵 Entrez le solde initial : ");
-					soulde = Validator.askPositiveDouble("");
-					sc.nextLine(); // clear buffer
-					System.out.println("📈 Entrez le taux d’intérêt (ex: 0.05 pour 5%) : ");
-					InterestRate = Validator.askInterestRate("");
-					sc.nextLine(); // clear buffer
-					tempCompteEpargne = new CompteEpargne(soulde, InterestRate);
-					acountID = tempCompteEpargne.getCode();
-					coumpts.put(acountID, tempCompteEpargne);
-					tempCompteEpargne = null;
+					tempCompteEpargne = Components.CCE();
+					coumpts.put(tempCompteCourant.getCode(), tempCompteCourant); 
+					System.out.println("you have create and account");
 					break;
 				default:
 					System.out.println("⚠️ Choix invalide pour le type de compte.");
@@ -293,73 +281,19 @@ public class main {
 				// logiqe opérations
 				System.out.print("👉 Entrez l'UUID du compte : ");
 				sc.nextLine(); // vider le buffer
+				
 				input = sc.nextLine();
-
-				try {
-					acountID = UUID.fromString(input);
-				} catch (IllegalArgumentException e) {
-					System.out.println("⚠️ UUID invalide !");
-					break;
+				if (!Validator.isValidUuid(input)) {
+				    break;
 				}
 //				will be replaced 
-				if (coumpts.get(acountID) instanceof CompteCourant) {
-					tempCompteCourant = (CompteCourant) coumpts.get(acountID);
-					retraitlist = tempCompteCourant.getRetraitList();
-					versementslist = tempCompteCourant.getVersement();
-					System.out.println("list de retrait de set compt");
-					if (retraitlist.isEmpty()) {
-						System.out.println("there is no retrait");
-					} else {
-						retraitlist.forEach((e) -> {
-							System.out.println("le ID de operation" + e.getNumero());
-							System.out.println("le Montant de set operation" + e.getMontant());
-							System.out.println("le date de set operation" + e.getOperationDate());
-							System.out.println("le date de set operation" + e.getDestination());
-						});
-					}
-
-					System.out.println("list de versement de set compt");
-					if (versementslist.isEmpty()) {
-						System.out.println("there is no retrait");
-					} else {
-						versementslist.forEach((e) -> {
-							System.out.println("le ID de operation" + e.getNumero());
-							System.out.println("le Montant de set operation" + e.getMontant());
-							System.out.println("le date de set operation" + e.getOperationDate());
-							System.out.println("le date de set operation" + e.getOperationDate());
-						});
-					}
-				}
-				if (coumpts.get(acountID) instanceof CompteEpargne) {
-					tempCompteEpargne = (CompteEpargne) coumpts.get(acountID);
-					retraitlist = tempCompteCourant.getRetraitList();
-					versementslist = tempCompteCourant.getVersement();
-
-					System.out.println("list de retrait de set compt");
-					if (retraitlist.isEmpty()) {
-						System.out.println("there is no retrait");
-					} else {
-						retraitlist.forEach((e) -> {
-							System.out.println("le ID de operation" + e.getNumero());
-							System.out.println("le Montant de set operation" + e.getMontant());
-							System.out.println("le date de set operation" + e.getOperationDate());
-							System.out.println("le date de set operation" + e.getDestination());
-						});
-					}
-
-					System.out.println("list de versement de set compt");
-					if (versementslist.isEmpty()) {
-						System.out.println("there is no retrait");
-					} else {
-						versementslist.forEach((e) -> {
-							System.out.println("le ID de operation" + e.getNumero());
-							System.out.println("le Montant de set operation" + e.getMontant());
-							System.out.println("le date de set operation" + e.getOperationDate());
-							System.out.println("le date de set operation" + e.getOperationDate());
-						});
-					}
-				}
-
+				Components.LSO(coumpts, acountID);
+				break;
+			case 7:
+				Set<UUID> IDS = coumpts.keySet();
+				for (UUID id : IDS) {
+		            System.out.println(id);
+		        }
 				break;
 			case 0:
 				System.out.println("👋 Merci d'avoir utilisé notre banque !");
