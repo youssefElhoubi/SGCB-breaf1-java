@@ -296,11 +296,58 @@ public class main {
 						tempCompteCourant = (CompteCourant) coumpts.get(acountID); 
 						retraitlist = tempCompteCourant.getRetraitList() ;
 						versementslist = tempCompteCourant.getVersement();
+						System.out.println("list de retrait de set compt");
+						if (retraitlist.isEmpty()) {
+							System.out.println("there is no retrait");
+						} else {
+							retraitlist.forEach((e)->{
+								System.out.println("le ID de operation"+e.getNumero());
+								System.out.println("le Montant de set operation"+e.getMontant());
+								System.out.println("le date de set operation"+e.getOperationDate());
+								System.out.println("le date de set operation"+e.getDestination());
+							});
+						}
+						
+						System.out.println("list de versement de set compt");
+						if (versementslist.isEmpty()) {
+							System.out.println("there is no retrait");
+						} else {
+							versementslist.forEach((e)->{
+								System.out.println("le ID de operation"+e.getNumero());
+								System.out.println("le Montant de set operation"+e.getMontant());
+								System.out.println("le date de set operation"+e.getOperationDate());
+								System.out.println("le date de set operation"+e.getOperationDate());
+							});
+						}
 					}
                     if (coumpts.get(acountID) instanceof CompteEpargne) {
 						tempCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
 						retraitlist = tempCompteCourant.getRetraitList() ;
 						versementslist = tempCompteCourant.getVersement();
+						
+						System.out.println("list de retrait de set compt");
+						if (retraitlist.isEmpty()) {
+							System.out.println("there is no retrait");
+						} else {
+							retraitlist.forEach((e)->{
+								System.out.println("le ID de operation"+e.getNumero());
+								System.out.println("le Montant de set operation"+e.getMontant());
+								System.out.println("le date de set operation"+e.getOperationDate());
+								System.out.println("le date de set operation"+e.getDestination());
+							});
+						}
+						
+						System.out.println("list de versement de set compt");
+						if (versementslist.isEmpty()) {
+							System.out.println("there is no retrait");
+						} else {
+							versementslist.forEach((e)->{
+								System.out.println("le ID de operation"+e.getNumero());
+								System.out.println("le Montant de set operation"+e.getMontant());
+								System.out.println("le date de set operation"+e.getOperationDate());
+								System.out.println("le date de set operation"+e.getOperationDate());
+							});
+						}
 					}
                     
                     break;

@@ -20,5 +20,21 @@ public abstract class Operation {
     public void setOperationDate(LocalDateTime operationDate) {
         this.operationDate = operationDate;
     }
+    
+    public UUID getNumero() {
+		return numero;
+	}
+
+	public void setNumero(UUID numero) {
+		this.numero = numero;
+	}
+
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
+	}
 	
 }
