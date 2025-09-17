@@ -294,13 +294,14 @@ public class main {
                     }
                     if (coumpts.get(acountID) instanceof CompteCourant) {
 						tempCompteCourant = (CompteCourant) coumpts.get(acountID); 
-						
+						retraitlist = tempCompteCourant.getRetraitList() ;
+						versementslist = tempCompteCourant.getVersement();
 					}
                     if (coumpts.get(acountID) instanceof CompteEpargne) {
 						tempCompteEpargne = (CompteEpargne) coumpts.get(acountID); 
+						retraitlist = tempCompteCourant.getRetraitList() ;
+						versementslist = tempCompteCourant.getVersement();
 					}
-                    
-                    
                     
                     break;
                 case 0:

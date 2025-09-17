@@ -40,5 +40,12 @@ public abstract class Compte {
     	public Versement getVersement(int posesion) {
 		return this.versement.get(posesion);
     	}
+    	public List<Retrait> getRetraitList(){
+    		return this.retrait;
+    	}
+    	public List<Versement> getVersement(){
+    		return this.versement;
+    	}
+    	
 	
 }
