@@ -57,7 +57,7 @@ public class main {
                     System.out.println("2️⃣  Compte Épargne");
                     System.out.print("👉 Choisissez le type de compte : ");
 
-                    int typeCompte = sc.nextInt();
+                    int typeCompte = Validator.isBetween(1, 2);
                     sc.nextLine();
 
                     switch (typeCompte) {

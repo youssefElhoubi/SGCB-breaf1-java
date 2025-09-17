@@ -73,5 +73,20 @@ public class Validator {
 				return false;
 	        }
 	    }
+	public static int isBetween(int min ,int max) {
+		int value;
+		while(true) {
+		if (sc.hasNextInt()) {
+			value = sc.nextInt();
+			if (value < min || value > max) {
+				System.out.println("you have entered a vlue that is less"+min+" or greater than " + max);
+			}
+			else {
+				return value;
+			}
+		 }
+		}
+	}
+	
 
 }
