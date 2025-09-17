@@ -1,4 +1,5 @@
 package metier;
+
 import java.time.LocalDateTime;
 import utils.OpperationSource;
 
@@ -11,21 +12,18 @@ public class Versement extends Operation {
 
 	private OpperationSource opperationsource;
 
-	
-	public Versement(double montant,OpperationSource op ) {
+	public Versement(double montant, OpperationSource op) {
 		super(montant);
 		this.opperationsource = op;
-		
-	}
 
+	}
 
 	public OpperationSource getOpperationsource() {
 		return opperationsource;
 	}
 
-
 	public void setOpperationsource(OpperationSource opperationsource) {
 		this.opperationsource = opperationsource;
 	}
-	
+
 }
