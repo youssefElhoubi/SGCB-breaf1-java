@@ -7,24 +7,25 @@ import java.util.UUID;
 
 public class Comptfinder {
 
-	public static CompteEpargne CompteEpargneFinder(UUID id, HashMap<UUID, Object> acounts) {
-		Object compte = acounts.get(id);
+	public static CompteEpargne CompteEpargneFinder(UUID id, HashMap<UUID, Object> accounts) {
+    Object compte = accounts.get(id);
 
-		if (compte instanceof CompteEpargne) {
-			return (CompteEpargne) compte; // safe cast
-		}
+    if (compte instanceof CompteEpargne) {
+        return (CompteEpargne) compte; // safe cast
+    }
 
-		return null;
-	}
+    return null;
+}
 
-	public static CompteCourant CompteCourantFinder(UUID id, HashMap<UUID, Object> acounts) {
-		Object compte = acounts.get(id);
 
-		if (compte instanceof CompteEpargne) {
-			return (CompteCourant) compte; // safe cast
-		}
+	public static CompteCourant CompteCourantFinder(UUID id, HashMap<UUID, Object> accounts) {
+	    Object compte = accounts.get(id);
 
-		return null;
+	    if (compte instanceof CompteCourant) { // ✅ fixed here
+	        return (CompteCourant) compte; // safe cast
+	    }
+
+	    return null;
 	}
 
 }
