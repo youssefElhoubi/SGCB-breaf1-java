@@ -3,13 +3,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import metier.*;
+import utils.OpperationSource;
 import utils.Validator;
+import java.util.Scanner;
+import utils.Comptfinder;
 
 public final class Components {
 	private static CompteCourant tempCompteCourant = null;
 	private static CompteEpargne tempCompteEpargne = null;
 	private static List<Retrait> retraitlist = null;
 	private static List<Versement> versementslist = null;
+	private static Scanner sc = new Scanner(System.in);
 	
 //	LSO means Liste des opérations
 	 public static boolean LSO(HashMap<UUID, Object> coumpts ,UUID acountID) {
@@ -102,5 +106,69 @@ public final class Components {
 			
 			return tempCompteEpargne ;
 	 }
+	// ---------------- Versement ----------------
+	    public static void Versement(HashMap<UUID, Object> coumpts) {
+	        UUID acountID = null;
+	        String input;
+	        Versement versement;
+
+	        System.out.println("💵 Versement dans un compte...");
+	        System.out.print("👉 Entrez l'UUID du compte : ");
+	        sc.nextLine(); // vider le buffer si besoin
+	        input = sc.nextLine();
+
+	        try {
+	            acountID = UUID.fromString(input);
+	        } catch (IllegalArgumentException e) {
+	            System.out.println("⚠️ UUID invalide !");
+	            return;
+	        }
+
+	        tempCompteCourant = Comptfinder.CompteCourantFinder(acountID, coumpts);
+	        tempCompteEpargne = Comptfinder.CompteEpargneFinder(acountID, coumpts);
+
+	        if (tempCompteCourant == null && tempCompteEpargne == null) {
+	            System.out.println("⚠️ Aucun compte trouvé avec cet UUID !");
+	            return;
+	        }
+
+	        System.out.print("👉 Entrez le montant du versement : ");
+	        double montant = sc.nextDouble();
+	        sc.nextLine(); // vider le buffer
+
+	        // --- Choix de la source ---
+	        System.out.println("👉 Choisissez la source du versement : ");
+	        System.out.println("1️⃣ Virement externe");
+	        System.out.println("2️⃣ Dépôt espèces");
+	        System.out.println("3️⃣ Salaire");
+	        int choixSource = sc.nextInt();
+	        sc.nextLine(); // vider le buffer
+
+	        OpperationSource source = null;
+	        switch (choixSource) {
+	            case 1:
+	                source = OpperationSource.VIREMENT_EXTERNE;
+	                break;
+	            case 2:
+	                source = OpperationSource.DEPOT_ESPECES;
+	                break;
+	            case 3:
+	                source = OpperationSource.SALAIRE;
+	                break;
+	            default:
+	                System.out.println("⚠️ Choix invalide, versement annulé !");
+	                return;
+	        }
+
+	        versement = new Versement(montant, source);
+
+	        if (tempCompteCourant != null) {
+	            tempCompteCourant.setVersement(versement);
+	            System.out.println("✅ Versement ajouté au Compte Courant.");
+	        } else if (tempCompteEpargne != null) {
+	            tempCompteEpargne.setVersement(versement);
+	            System.out.println("✅ Versement ajouté au Compte Épargne.");
+	        }
+	    }
 
 	}

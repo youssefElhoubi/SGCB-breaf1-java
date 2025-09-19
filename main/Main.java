@@ -12,7 +12,7 @@ import utils.OpperationSource;
 import utils.Destination;
 import ui.Components;
 
-public class main {
+public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int choix;
@@ -60,20 +60,19 @@ public class main {
 				System.out.print("👉 Choisissez le type de compte : ");
 
 				int typeCompte = Validator.isBetween(1, 2);
-				sc.nextLine();
 
 				switch (typeCompte) {
 				case 1:
 					
 					tempCompteCourant = Components.CCM();
 					coumpts.put(tempCompteCourant.getCode(), tempCompteCourant);
-					System.out.println("you have create and account");
+					System.out.println("you have create an account");
 					// Ici : demander infos (solde initial, découvert autorisé, etc.)
 					break;
 				case 2:
 					tempCompteEpargne = Components.CCE();
 					coumpts.put(tempCompteCourant.getCode(), tempCompteCourant); 
-					System.out.println("you have create and account");
+					System.out.println("you have create an account");
 					break;
 				default:
 					System.out.println("⚠️ Choix invalide pour le type de compte.");
