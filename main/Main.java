@@ -11,6 +11,7 @@ import utils.Comptfinder;
 import utils.OpperationSource;
 import utils.Destination;
 import ui.Components;
+import utils.Filler;
 
 public class Main {
 	public static void main(String[] args) {
@@ -32,6 +33,7 @@ public class Main {
 		HashMap<UUID, Object> coumpts = new HashMap<UUID, Object>();
 		List<Retrait> retraitlist = null;
 		List<Versement> versementslist = null;
+		Filler.filler(coumpts);
 
 		do {
 			System.out.flush();
@@ -212,7 +214,7 @@ public class Main {
 					ReseverCompteEpargne = (CompteEpargne) coumpts.get(acountID);
 				}
 				System.out.print("👉 Entrez le monton de Virement : ");
-				double vermont = Validator.asknegativeDouble("");
+				double vermont = Validator.askNegativeDouble("");
 
 				retrait = new Retrait(vermont, Destination.VIREMENT_SORTANT);
 //                    sender
