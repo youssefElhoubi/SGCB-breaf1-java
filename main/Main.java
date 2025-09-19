@@ -260,12 +260,12 @@ public class Main {
 
 				if (coumpts.get(acountID) instanceof CompteCourant) {
 					tempCompteCourant = (CompteCourant) coumpts.get(acountID);
-					System.out.println("💰 Solde du compte [" + tempCompteCourant.getCode() + "] : "
+					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde()() + "] : "
 							+ tempCompteCourant.getSolde() + " €");
 				}
 				if (coumpts.get(acountID) instanceof CompteEpargne) {
 					tempCompteEpargne = (CompteEpargne) coumpts.get(acountID);
-					System.out.println("💰 Solde du compte [" + tempCompteCourant.getCode() + "] : "
+					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde()() + "] : "
 							+ tempCompteCourant.getSolde() + " €");
 				}
 				break;
