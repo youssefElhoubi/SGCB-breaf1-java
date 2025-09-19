@@ -92,7 +92,6 @@ public final class Components {
 			double decouvert = Validator.asknegativeDouble("");
 			tempCompteCourant = new CompteCourant(soulde, decouvert);
 			UUID acountID = tempCompteCourant.getCode();
-			System.out.println("you have create and account");
 			return tempCompteCourant;
 	 }
 	 public static CompteEpargne CCE () {

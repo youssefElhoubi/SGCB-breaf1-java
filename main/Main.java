@@ -81,7 +81,6 @@ public class Main {
 			case 2:
 				System.out.println("💵 Versement dans un compte...");
 				System.out.print("👉 Entrez l'UUID du compte : ");
-				sc.nextLine(); // pour vider le buffer si besoin
 				input = sc.nextLine();
 
 				try {
@@ -101,7 +100,6 @@ public class Main {
 
 				System.out.print("👉 Entrez le montant du versement : ");
 				double montant = sc.nextDouble();
-				sc.nextLine(); // vider le buffer
 
 				// --- Demander la source du versement ---
 				System.out.println("👉 Choisissez la source du versement : ");
@@ -109,7 +107,6 @@ public class Main {
 				System.out.println("2️⃣ Dépôt espèces");
 				System.out.println("3️⃣ Salaire");
 				int choixSource = sc.nextInt();
-				sc.nextLine(); // vider le buffer
 
 				OpperationSource source = null;
 				switch (choixSource) {
@@ -139,7 +136,6 @@ public class Main {
 			case 3:
 				System.out.println("🏧 Retrait d'un compte...");
 				System.out.print("👉 Entrez l'UUID du compte : ");
-				sc.nextLine(); // vider le buffer si besoin
 				input = sc.nextLine();
 
 				try {
@@ -159,10 +155,8 @@ public class Main {
 
 				System.out.print("👉 Entrez le montant du retrait : ");
 				montant = sc.nextDouble();
-				sc.nextLine(); // vider le buffer
 
 				int choixDestination = sc.nextInt();
-				sc.nextLine(); // vider le buffer
 
 				switch (choixDestination) {
 				case 1:
@@ -194,10 +188,8 @@ public class Main {
 			case 4:
 				System.out.println("🔄 Virement entre comptes...");
 				System.out.print("👉 Entrez l'UUID du compte of the sender : ");
-				sc.nextLine(); // pour vider le buffer si besoin
 				input = sc.nextLine();
 				System.out.print("👉 Entrez l'UUID du compte resever : ");
-				sc.nextLine(); // pour vider le buffer si besoin
 				String secondinput = sc.nextLine();
 
 				try {
@@ -251,7 +243,6 @@ public class Main {
 			case 5:
 				System.out.println("📊 Consultation du solde...");
 				System.out.print("👉 Entrez l'UUID du compte : ");
-				sc.nextLine(); // vider le buffer
 				String inputUUID = sc.nextLine();
 
 				try {
@@ -279,7 +270,6 @@ public class Main {
 				System.out.println("📜 Liste des opérations...");
 				// logiqe opérations
 				System.out.print("👉 Entrez l'UUID du compte : ");
-				sc.nextLine(); // vider le buffer
 				
 				input = sc.nextLine();
 				if (!Validator.isValidUuid(input)) {
