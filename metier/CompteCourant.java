@@ -7,6 +7,7 @@ public class CompteCourant extends Compte {
 	private double decouvert;
 
 	public CompteCourant(double soulde, double decouvert) {
+		super();
 		this.code = UUID.randomUUID();
 		this.solde = soulde;
 		this.decouvert = decouvert;

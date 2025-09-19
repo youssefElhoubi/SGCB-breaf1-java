@@ -9,6 +9,11 @@ public abstract class Compte {
 	protected List<Retrait> retrait;
 	protected List<Versement> versement;
 
+	public Compte() {
+    this.retrait = new ArrayList<>();
+    this.versement = new ArrayList<>();
+}
+
 	public abstract boolean retirer(double amount);
 
 	public abstract double calculerInteret(float intrest);

@@ -7,6 +7,7 @@ public class CompteEpargne extends Compte {
 	private double InterestRate;
 	
 	public CompteEpargne(double soulde,double InterestRate) {
+		super();
 		this.code = UUID.randomUUID();
 		this.solde = soulde;
 	}
