@@ -23,7 +23,7 @@ public class CompteCourant extends Compte {
 
 	@Override()
 	public boolean retirer(double amount) {
-		if (this.solde - amount > this.decouvert) {
+		if (this.solde - amount < this.decouvert) {
 			System.out.println(
 					"le montant que vous essayez de retirer est supérieur au découvert autorisé pour votre compte");
 			return false;
