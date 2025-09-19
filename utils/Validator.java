@@ -71,6 +71,7 @@ public class Validator {
 	    while (true) {
 	        System.out.print("👉 Entrez une valeur entre " + min + " et " + max + " : ");
 	        String input = sc.nextLine();
+	        sc.nextLine();
 	        try {
 	            int value = Integer.parseInt(input);
 	            if (value < min || value > max) {

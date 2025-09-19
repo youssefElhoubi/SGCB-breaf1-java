@@ -89,7 +89,7 @@ public final class Components {
 			System.out.println("💵 Entrez le solde initial : ");
 			double soulde = Validator.askPositiveDouble("");
 			System.out.println("📉 Entrez le découvert autorisé (montant positif) : ");
-			double decouvert = Validator.asknegativeDouble("");
+			double decouvert = Validator.askNegativeDouble("");
 			tempCompteCourant = new CompteCourant(soulde, decouvert);
 			UUID acountID = tempCompteCourant.getCode();
 			return tempCompteCourant;
