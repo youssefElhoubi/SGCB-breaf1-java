@@ -84,6 +84,16 @@ public class Validator {
 	        }
 	    }
 	}
+	public static boolean validateUUID(String id) {
+		try {
+			UUID acountID = UUID.fromString(id);
+		} catch (IllegalArgumentException e) {
+			System.out.println("⚠️ UUID invalide !");
+			return false;
+		}
+		return true;
+		
+	}
 	public static boolean doeaObjectExist(HashMap<UUID,Object>compt,UUID ID) {
 		if (compt.get(ID)==null) {
 			return false;

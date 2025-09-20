@@ -157,9 +157,17 @@ public class Main {
 				}
 
 				System.out.print("👉 Entrez le montant du retrait : ");
-				montant = sc.nextDouble();
+				montant = Validator.askPositiveDouble("");
+				
+				System.out.println("=======================================");
+				System.out.println("         Retrait - Choisir destination ");
+				System.out.println("=======================================");
+				System.out.println("1. Distributeur ATM");
+				System.out.println("2. Cheque");
+				System.out.println("3. Virement sortant");
+				System.out.print("👉 Entrez votre choix : ");
 
-				int choixDestination = sc.nextInt();
+				int choixDestination = Validator.isBetween(1, 3);
 
 				switch (choixDestination) {
 				case 1:
@@ -176,6 +184,7 @@ public class Main {
 					break;
 				}
 				retrait = new Retrait(montant, destination);
+				System.out.println("you have made your verment ");
 
 				if (tempCompteCourant != null) {
 					if (tempCompteCourant.retirer(montant)) {
@@ -260,12 +269,12 @@ public class Main {
 
 				if (coumpts.get(acountID) instanceof CompteCourant) {
 					tempCompteCourant = (CompteCourant) coumpts.get(acountID);
-					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde()() + "] : "
+					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde() + "] : "
 							+ tempCompteCourant.getSolde() + " €");
 				}
 				if (coumpts.get(acountID) instanceof CompteEpargne) {
 					tempCompteEpargne = (CompteEpargne) coumpts.get(acountID);
-					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde()() + "] : "
+					System.out.println("💰 Solde du compte [" + tempCompteCourant.getSolde() + "] : "
 							+ tempCompteCourant.getSolde() + " €");
 				}
 				break;

@@ -1,0 +1,13 @@
+C:\Users\youco\eclipse-workspace\project\main\Main.java
+C:\Users\youco\eclipse-workspace\project\metier\Compte.java
+C:\Users\youco\eclipse-workspace\project\metier\CompteCourant.java
+C:\Users\youco\eclipse-workspace\project\metier\CompteEpargne.java
+C:\Users\youco\eclipse-workspace\project\metier\Operation.java
+C:\Users\youco\eclipse-workspace\project\metier\Retrait.java
+C:\Users\youco\eclipse-workspace\project\metier\Versement.java
+C:\Users\youco\eclipse-workspace\project\ui\Components.java
+C:\Users\youco\eclipse-workspace\project\utils\Comptfinder.java
+C:\Users\youco\eclipse-workspace\project\utils\Destination.java
+C:\Users\youco\eclipse-workspace\project\utils\Filler.java
+C:\Users\youco\eclipse-workspace\project\utils\OpperationSource.java
+C:\Users\youco\eclipse-workspace\project\utils\Validator.java
